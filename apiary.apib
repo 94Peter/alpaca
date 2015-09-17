@@ -1,11 +1,11 @@
 FORMAT: 1A
 HOST: http://polls.apiblueprint.org/
 
-# ALPACA - LINE
+# ALPACA - Communitation
 
-***LINE***提供訊息發送、擷取聯絡人資料、登入等功能
+提供各種channel發送訊息給客戶
 
-# Group 系統
+# Group 系統設定
 
 ## 系統參數 [/sys]
 
@@ -17,25 +17,56 @@ HOST: http://polls.apiblueprint.org/
 
 + Response 200
 
-## 登入 [/login]
+# Group SMS
+## 訊息 [/sms]
 
-### 帳號&密碼 登入 [POST]
+### 列出所有簡訊清單 [GET /sms{?status,userId}]
+
++ Parameters
+    + status (enum[number], optional) - 狀態 
+        + Members
+            + `0` - 未發送 
+            + `1` - 發送成功 
+            + `-1` - 發送失敗
+    + userId (number, optional)
+
++ Request Sample1 (text/plain)
+    
+    + Headers
+    
+            authorize: qpnasdfasdf
+    
 
 + Response 200 (application/json)
 
-### Token 登入 [POST /login/token/{token}]
+        [
+            {
+                "id": 1,
+                "status": 0,
+                "userId": "S1234"
+                "sendDateTime": "2015-09-21 13:20:00"
+            },
+            {
+                "id": 2,
+                "status": 0,
+                "userId": "S1234"
+                "sendDateTime": "2015-09-21 13:20:00"
+            }
+        ]
+        
++ Request Sample2 (text/plain)
+
++ Response 500
+
+
+### 發送簡訊 [POST]
 
 + Response 201
 
-## 登出 [/logout]
-### 登出 [POST]
+# Group Mail
+## 訊息 [/mail]
 
-+ Response 201
-
-# Group 訊息
-## 訊息 [/msg]
-
-### 單一使用者發送訊息 [POST /msg/{uId}]
+### 發送訊息 [POST]
 
 + Response 201
 
@@ -43,20 +74,42 @@ HOST: http://polls.apiblueprint.org/
 
 + Response 200
 
-# Group 聯絡人
-## 聯絡人集合 [/contacts]
+# Group Line
 
-### 取得聯絡人清單 [GET /contacts{?limit,page}]
+## 登入 [/line/login]
+### 帳號&密碼 登入 [POST]
+
++ Response 200 (application/json)
+
+### Token 登入 [POST /line/login/token/{token}]
+
++ Response 201
+
+## 登出 [/line/logout]
+### 登出 [POST]
+
++ Response 201
+
+## 聯絡人清單 [/line/contacts]
+### 取得聯絡人清單 [GET /line/contacts{?limit,page}]
 
 + Response 200
 
-## 特定聯絡人詳細資料 [/contact]
-### uId比對 [GET /contact/{uId}]
+## 聯絡人詳細資料 [/line/contact]
+### uId比對 [GET /line/contact/{uId}]
 
 + Response 200
 
-### 自定義名稱比對 [GET /contact{?overrideName}]
+### 自定義名稱比對 [GET /line/contact{?overrideName}]
 
 + Response 200
 
+## 訊息 [/line/msg]
 
+### 單一使用者發送訊息 [POST /line/msg/{uId}]
+
++ Response 201
+
+### 取得訊息清單 [GET]
+
++ Response 200
