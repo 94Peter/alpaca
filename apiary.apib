@@ -1,0 +1,62 @@
+FORMAT: 1A
+HOST: http://polls.apiblueprint.org/
+
+# ALPACA - LINE
+
+***LINE***提供訊息發送、擷取聯絡人資料、登入等功能
+
+# Group 系統
+
+## 系統參數 [/sys]
+
+### 系統參數設定 [POST]
+
++ Response 200
+
+### 取得系統參數 [GET]
+
++ Response 200
+
+## 登入 [/login]
+
+### 帳號&密碼 登入 [POST]
+
++ Response 200 (application/json)
+
+### Token 登入 [POST /login/token/{token}]
+
++ Response 201
+
+## 登出 [/logout]
+### 登出 [POST]
+
++ Response 201
+
+# Group 訊息
+## 訊息 [/msg]
+
+### 單一使用者發送訊息 [POST /msg/{uId}]
+
++ Response 201
+
+### 取得訊息清單 [GET]
+
++ Response 200
+
+# Group 聯絡人
+## 聯絡人集合 [/contacts]
+
+### 取得聯絡人清單 [GET /contacts{?limit,page}]
+
++ Response 200
+
+## 特定聯絡人詳細資料 [/contact]
+### uId比對 [GET /contact/{uId}]
+
++ Response 200
+
+### 自定義名稱比對 [GET /contact{?overrideName}]
+
++ Response 200
+
+
